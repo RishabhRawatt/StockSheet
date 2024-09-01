@@ -1,14 +1,14 @@
 import express from "express";
 import { NseIndia } from "stock-nse-india";
-import { fetchAndUpdate } from "./stockdata";
+import { fetchAndUpdate } from "./src/stockdata";
 import { CronJob } from "cron";
 
 const nseIndia = new NseIndia();
 
 const app = express();
 const job = new CronJob(
-  // "0,30 9-16 * * 1-5",
-  "*/10 * * * * *", //every 10 sec
+  "0,30 9-16 * * 1-5",
+  // "*/10 * * * * *", //every 10 sec
   () => {
     fetchAndUpdate();
     console.log("Fetching every 30 minutes during market hours...");
