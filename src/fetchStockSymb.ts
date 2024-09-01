@@ -2,7 +2,7 @@ import { google } from "googleapis";
 
 export const fetchStockSymbols = async (): Promise<string[]> => {
   const auth = new google.auth.GoogleAuth({
-    keyFile: "./googleSheet.json", 
+    keyFile: "./googleSheets.json", 
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 

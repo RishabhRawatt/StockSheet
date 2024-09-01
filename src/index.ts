@@ -2,9 +2,7 @@ import express from "express";
 import { NseIndia } from "stock-nse-india";
 import { fetchAndUpdate } from "./stockdata";
 import { CronJob } from "cron";
-import dotenv from "dotenv";
 
-dotenv.config();
 
 const nseIndia = new NseIndia();
 
