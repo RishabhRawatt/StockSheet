@@ -3,7 +3,6 @@ import { NseIndia } from "stock-nse-india";
 import { fetchAndUpdate } from "./stockdata";
 import { CronJob } from "cron";
 
-
 const nseIndia = new NseIndia();
 
 const app = express();
@@ -32,6 +31,6 @@ app.get("/:symb", async (req, res) => {
   }
 });
 
-app.listen(3000, () => {
-  console.log("server is on 3000");
+app.listen(process.env.SERVER_PORT || 3000, () => {
+  console.log(`server is on ${process.env.SERVER_PORT}`);
 });
