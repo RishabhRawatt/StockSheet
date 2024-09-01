@@ -1,6 +1,6 @@
 import { NseIndia } from "stock-nse-india";
-import { updateGoogleSheet } from "./googleSheets.js";
-import { fetchStockSymbols } from "./fetchStockSymb.js";
+import { updateGoogleSheet } from "./googleSheets";
+import { fetchStockSymbols } from "./fetchStockSymb";
 
 const nseIndia = new NseIndia();
 
