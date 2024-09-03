@@ -5,9 +5,24 @@ import { CronJob } from "cron";
 
 const nseIndia = new NseIndia();
 
+const pingSelf = () => {
+  const url =
+    process.env.RENDER_EXTERNAL_URL ||
+    `http://localhost:${process.env.SERVER_PORT || 3000}/titan`;
+
+  setInterval(() => {
+    fetch(url)
+      .then((res) => console.log(`Pinged ${url} - Status: ${res.status}`))
+      .catch((err) => console.error("Error pinging self:", err));
+  }, 14 * 60 * 1000); // Ping every 14 minutes
+};
+
+pingSelf();
+
 const app = express();
 const job = new CronJob(
-  "0,30 9-16 * * 1-5",
+  // "0,30 9-16 * * 1-5",
+  "*/13 * * * *", //test every 13min
   // "*/10 * * * * *", //every 10 sec
   () => {
     fetchAndUpdate();
@@ -32,5 +47,5 @@ app.get("/:symb", async (req, res) => {
 });
 
 app.listen(process.env.SERVER_PORT || 3000, () => {
-  console.log(`server is on ${process.env.SERVER_PORT}`);
+  console.log(`server is on ${process.env.SERVER_PORT || 3000}`);
 });
