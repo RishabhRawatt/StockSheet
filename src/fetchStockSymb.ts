@@ -2,7 +2,7 @@ import { google } from "googleapis";
 
 export const fetchStockSymbols = async (): Promise<string[]> => {
   const auth = new google.auth.GoogleAuth({
-    keyFile: "../../etc/secrets/googleSheet.json", 
+    keyFile: "/etc/secrets/googleSheet.json",
     scopes: ["https://www.googleapis.com/auth/spreadsheets"],
   });
 
@@ -18,7 +18,7 @@ export const fetchStockSymbols = async (): Promise<string[]> => {
   const rows = response.data.values;
   if (rows && rows.length > 0) {
     const [symbols] = rows;
-    return symbols.filter(symbol => symbol);
+    return symbols.filter((symbol) => symbol);
   } else {
     throw new Error("No data found in the specified range");
   }
