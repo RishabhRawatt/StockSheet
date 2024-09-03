@@ -1,4 +1,5 @@
 import { google } from "googleapis";
+import { format, toZonedTime } from "date-fns-tz";
 
 export const updateGoogleSheet = async (data: (number | string)[]) => {
   const auth = new google.auth.GoogleAuth({
@@ -10,16 +11,12 @@ export const updateGoogleSheet = async (data: (number | string)[]) => {
   const spreadsheetId = process.env.SPREADSHEET_ID;
 
   const now = new Date();
-  const date = now.toLocaleDateString("en-US", {
-    year: "numeric",
-    month: "long",
-    day: "numeric",
-  });
-  const time = now.toLocaleTimeString("en-US", {
-    hour: "numeric",
-    minute: "numeric",
-    hour12: true,
-  });
+  const timeZone = "Asia/Kolkata";
+  const zonedTime = toZonedTime(now, timeZone);
+
+  // Format the date and time according to the specified time zone
+  const date = format(zonedTime, "yyyy-MM-dd", { timeZone });
+  const time = format(zonedTime, "hh:mm a", { timeZone });
 
   const formattedData = [[date, time, ...data]];
 

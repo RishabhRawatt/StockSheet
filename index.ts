@@ -7,7 +7,7 @@ const nseIndia = new NseIndia();
 
 const pingSelf = () => {
   const url =
-    process.env.RENDER_EXTERNAL_URL ||
+    `${process.env.RENDER_EXTERNAL_URL}/titan` ||
     `http://localhost:${process.env.PORT || 3000}/titan`;
 
   setInterval(() => {
@@ -21,8 +21,8 @@ pingSelf();
 
 const app = express();
 const job = new CronJob(
-  // "0,30 9-16 * * 1-5",
-  "*/13 * * * *", //test every 13min
+  "0,30 9-16 * * 1-5", //stock time and sat sun off
+  // "*/13 * * * *", //test every 13min
   // "*/10 * * * * *", //every 10 sec
   () => {
     fetchAndUpdate();
