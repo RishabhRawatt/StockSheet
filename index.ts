@@ -8,7 +8,7 @@ const nseIndia = new NseIndia();
 const pingSelf = () => {
   const url =
     process.env.RENDER_EXTERNAL_URL ||
-    `http://localhost:${process.env.SERVER_PORT || 3000}/titan`;
+    `http://localhost:${process.env.PORT || 3000}/titan`;
 
   setInterval(() => {
     fetch(url)
@@ -46,6 +46,6 @@ app.get("/:symb", async (req, res) => {
   }
 });
 
-app.listen(process.env.SERVER_PORT || 3000, () => {
-  console.log(`server is on ${process.env.SERVER_PORT || 3000}`);
+app.listen(process.env.PORT || 3000, () => {
+  console.log(`server is on ${process.env.PORT || 3000}`);
 });
